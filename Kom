@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompliment des Tages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #ff6347;
+        }
+        p {
+            font-size: 20px;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dein Kompliment des Tages!</h1>
+        <p id="compliment"></p>
+    </div>
+
+    <script>
+        // Array mit den 100+ Komplimenten
+        const compliments = [
+            "Du bist einzigartig, und das macht dich besonders! 🌟",
+            "Deine Kreativität kennt keine Grenzen! 🎨",
+            "Du bringst so viel Licht in diese Welt! ✨",
+            "Deine positive Energie ist ansteckend! 🌈",
+            "Du bist ein wahres Original! 🧡",
+            "Alles, was du tust, wird mit Liebe gemacht! 💖",
+            "Du hast eine unglaublich schöne Ausstrahlung! 🌸",
+            "Dein Lächeln kann ganze Räume erhellen! 😄",
+            "Du bist der Inbegriff von Stil und Eleganz! 💅",
+            "Du inspirierst die Menschen um dich herum! 🌟",
+            "Es ist eine Freude, mit dir zusammen zu sein! 😊",
+            "Deine Fähigkeiten sind beeindruckend! 💪",
+            "Du machst die Welt um dich herum schöner! 🌍",
+            "Du bist stark und mutig! 💪",
+            "Jeder Tag ist besser, wenn du ihn erlebst! 🌞",
+            "Dein Sinn für Humor ist einfach unschlagbar! 😂",
+            "Du bist der Grund, warum Menschen sich gut fühlen! 💛",
+            "Du bringst Wärme und Liebe, wo auch immer du bist! 🔥",
+            "Du bist eine wahre Quelle der Inspiration! 💡",
+            "Es gibt niemanden wie dich, und das ist fantastisch! 💫",
+            "Du kannst alles erreichen, was du dir vornimmst! 🚀",
+            "Deine Leidenschaft ist unglaublich ansteckend! 🔥",
+            "Du hast eine unverwechselbare, positive Energie! 🌟",
+            "Du machst das Leben schöner! 💖",
+            "Du bist ein wahrer Teamplayer! 🤝",
+            "Deine Freundlichkeit kennt keine Grenzen! 🌸",
+            "Du bist ein wahres Vorbild! ✨",
+            "Dein Engagement ist beeindruckend! 💼",
+            "Du bist immer da, wenn man dich braucht! 🤗",
+            "Deine Ideen sind immer voller Kreativität! 💡",
+            "Du bist ein wahrer Genuss für die Augen! 👀",
+            "Deine Energie ist einfach ansteckend! 💥",
+            "Du bist eine unglaubliche Unterstützung für alle! 💪",
+            "Dein Mut ist bewundernswert! 🦸",
+            "Du siehst immer das Beste in jeder Situation! 🌈",
+            "Du bist die Definition von Positivität! 😊",
+            "Mit dir an der Seite fühlt man sich immer sicher! 🤗",
+            "Du wirst immer größer und stärker! 🌱",
+            "Du machst selbst die langweiligsten Aufgaben spannend! 🎉",
+            "Du hast so viel Liebe zu geben! 💖",
+            "Dein inneres Licht ist einfach magisch! ✨",
+            "Du hast eine unglaubliche Ausstrahlung! 🌟",
+            "Es gibt nichts, was du nicht schaffen könntest! 🚀",
+            "Du bist immer ein Fels in der Brandung! 🌊",
+            "Du findest immer Lösungen, selbst in schwierigen Situationen! 🧩",
+            "Du bist ein wahrer Meister deines Fachs! 🎓",
+            "Du machst die Welt um dich herum zu einem besseren Ort! 🌍",
+            "Du bist stärker als du denkst! 💪",
+            "Du bist immer ein Lichtblick für alle um dich herum! 🌞",
+            "Deine Begeisterung ist einfach mitreißend! 😍",
+            "Du strahlst eine unglaubliche Ruhe aus! 🌸",
+            "Du hast ein außergewöhnliches Talent! 🎨",
+            "Deine Freude ist ansteckend! 🥳",
+            "Du bist die beste Version von dir selbst! 💯",
+            "Deine Visionen sind klar und kraftvoll! 👁",
+            "Du bist die Energie, die du in die Welt bringst! ⚡",
+            "Deine Begeisterung kennt keine Grenzen! 🌟",
+            "Du bist wie ein Diamant, glänzend und einzigartig! 💎",
+            "Du bist ein wahres Multitalent! 🌟",
+            "Du schaffst es, immer das Gute in allem zu sehen! 🌈",
+            "Dein Mut ist ein wahres Vorbild! 🦁",
+            "Du bist eine Quelle der Ruhe und Gelassenheit! 🌿",
+            "Mit dir wird jeder Tag zu einem besonderen Tag! 🌅",
+            "Du bist der Inbegriff von Stärke und Weisheit! 💡",
+            "Deine Freundlichkeit berührt die Herzen der Menschen! 💛",
+            "Deine Ausstrahlung ist voller Leben und Freude! 🌞",
+            "Du hast eine unglaubliche Fähigkeit, anderen zu helfen! 🙌",
+            "Du bist ein unglaublicher Problemlöser! 🧩",
+            "Du strahlst in allem, was du tust! ✨",
+            "Du bist voller Potenzial und Möglichkeiten! 🌟",
+            "Du hast die Fähigkeit, immer das Beste aus einer Situation zu machen! 💪",
+            "Dein Humor bringt Freude in die Welt! 😂",
+            "Du bist die Person, auf die andere zählen können! 🤝",
+            "Du hast ein großes Herz und viel Liebe zu geben! 💖",
+            "Du bist immer eine positive Quelle der Energie! ⚡",
+            "Du schaffst es immer, das Beste in dir und anderen zu sehen! 🌸",
+            "Deine Perspektive ist einzigartig und inspirierend! 🌍",
+            "Du hast eine unglaubliche Geduld und Ausdauer! 🕰",
+            "Du machst alles mit so viel Liebe und Hingabe! 💖",
+            "Du bist die Definition von Durchhaltevermögen! 💪",
+            "Mit dir wird jeder Tag heller und schöner! ☀️",
+            "Du bist ein wahrer Meister der Balance! ⚖️",
+            "Du gibst nie auf, und das ist eine wunderbare Eigenschaft! 🏆",
+            "Du bist einfach großartig, so wie du bist! 🌻",
+            "Du bist die Quelle für positive Veränderungen! 🔄",
+            "Du hast eine unglaubliche innere Stärke! 💪",
+            "Dein Engagement und deine Hingabe sind bewundernswert! 🏅",
+            "Du bist eine wunderbare Quelle der Inspiration für alle um dich! 🌟",
+            "Du machst jeden Moment besonderer! ⏳",
+            "Du hast ein unglaublich gutes Herz! 💛",
+            "Du bist eine wahre Schönheit, innen und außen! 🌸",
+            "Du bringst immer gute Vibes! ✨",
+            "Du bist die Definition von Authentizität! 💫",
+            "Du bist unglaublich wertvoll, und die Welt braucht mehr Menschen wie dich! 💖",
+            "Deine Leidenschaft ist ansteckend und unglaublich motivierend! 🔥",
+            "Du bist ein wahrer Felsen in der Brandung, immer zuverlässig! 🌊"
+        ];
+
+        // Funktion zum Abrufen des gespeicherten Kompliments
+        function getCompliment() {
+            let storedCompliment = localStorage.getItem("compliment");
+
+            if (!storedCompliment) {
+                // Wenn noch kein Kompliment gespeichert ist, zufällig eines auswählen
+                let randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+                localStorage.setItem("compliment", randomCompliment);
+                return randomCompliment;
+            }
+
+            return storedCompliment;
+        }
+
+        // Kompliment anzeigen
+        document.getElementById("compliment").innerText = getCompliment();
+    </script>
+</body>
+</html>
