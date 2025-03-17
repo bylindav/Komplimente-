@@ -30,12 +30,27 @@
             color: #333;
             margin-top: 20px;
         }
+        .button {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #e5533e;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Dein Kompliment des Tages!</h1>
         <p id="compliment"></p>
+        <a href="https://linktr.ee/bylindav" class="button" target="_blank">Besuche meinen Linktree!</a>
     </div>
 
     <script>
